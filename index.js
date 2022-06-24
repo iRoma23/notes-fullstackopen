@@ -42,7 +42,7 @@ app.post('/api/notes', (request, response, next) => {
   const note = new Note({
     content: body.content,
     important: body.important || false,
-    date: new Date(),
+    date: new Date()
   })
 
   note.save()
@@ -66,7 +66,7 @@ app.get('/api/notes/:id', (request, response, next) => {
 
 app.delete('/api/notes/:id', (request, response, next) => {
   Note.findByIdAndRemove(request.params.id)
-    .then(result => {
+    .then(() => {
       response.status(204).end()
     })
     .catch(error => next(error))
@@ -77,14 +77,14 @@ app.put('/api/notes/:id', (request, response, next) => {
 
   const note = {
     content: body.content,
-    important: body.important,
+    important: body.important
   }
 
   Note.findByIdAndUpdate(
-      request.params.id,
-      note,
-      { new: true, runValidators: true, context: 'query' }
-    )
+    request.params.id,
+    note,
+    { new: true, runValidators: true, context: 'query' }
+  )
     .then(updatedNote => {
       response.json(updatedNote)
     })

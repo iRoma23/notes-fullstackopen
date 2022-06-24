@@ -14,29 +14,13 @@ const url = `mongodb+srv://romadev:${password}@cluster0.gzb004o.mongodb.net/note
 const noteSchema = new mongoose.Schema({
   content: String,
   date: Date,
-  important: Boolean,
+  important: Boolean
 })
 
 const Note = mongoose.model('Note', noteSchema)
 
 mongoose
   .connect(url)
-  // .then((result) => {
-  //   console.log('connected')
-
-  //   const note = new Note({
-  //     content: 'HTML is Easy',
-  //     date: new Date(),
-  //     important: true,
-  //   })
-
-  //   return note.save()
-  // })
-  // .then((result) => {
-  //   console.log('note saved!')
-  //   console.log(result)
-  //   return mongoose.connection.close()
-  // })
   .then(() => {
     return Note.find({})
   })
